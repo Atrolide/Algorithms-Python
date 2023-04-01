@@ -1,4 +1,4 @@
-# Algorithms-Python
+# A) "Mom bought me a new computer"
  
  Implement the following pattern matching algorithms: 
 * Brute-force
