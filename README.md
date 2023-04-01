@@ -8,7 +8,7 @@
 
 To use this project, follow these steps:
 
-* Clone this repository
+* [Clone this repository](github.com/Atrolide/Algorithms-Python.git)
 * Open you Command Line Tool and navigate to the project's root directory
 * Enter the following command:
    ```bash
