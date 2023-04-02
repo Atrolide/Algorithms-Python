@@ -1,28 +1,28 @@
+def rolling_hash(text, start, end, prime):
+    p = 31  # prime number for hashing
+    hash_value = 0
+    power_p = 1
+
+    for i in range(start, end):
+        hash_value = (hash_value + (ord(text[i]) - ord('a') + 1) * power_p) % prime
+        power_p = (power_p * p) % prime
+
+    return hash_value
+
+
 def rabin_karp_search(pattern, text):
-    p = len(pattern)
-    t = len(text)
-    result = []
-    if p > t:
-        return result
+    prime = 101  # large prime number for hashing
+    pattern_hash = rolling_hash(pattern, 0, len(pattern), prime)
+    text_hash = rolling_hash(text, 0, len(pattern), prime)
 
-    # Choose a prime number and a base for hashing
-    prime = 101
-    base = 256
+    results = []
+    for i in range(len(text) - len(pattern) + 1):
+        if pattern_hash == text_hash and pattern == text[i:i + len(pattern)]:
+            results.append(i)
 
-    # Calculate hash values for pattern and the first window of text
-    pattern_hash = 0
-    window_hash = 0
-    for i in range(p):
-        pattern_hash = (pattern_hash * base + ord(pattern[i])) % prime
-        window_hash = (window_hash * base + ord(text[i])) % prime
+        if i < len(text) - len(pattern):
+            text_hash = (text_hash - (ord(text[i]) - ord('a') + 1) * (prime**(len(pattern)-1))) % prime
+            text_hash = (text_hash * 31 + (ord(text[i + len(pattern)]) - ord('a') + 1)) % prime
+            text_hash = (text_hash + prime) % prime
 
-    # Slide the pattern over the text, rehashing the window each time
-    for i in range(t - p + 1):
-        if pattern_hash == window_hash and pattern == text[i:i + p]:
-            result.append(i)
-
-        # Calculate the hash value for the next window of text
-        if i < t - p:
-            window_hash = (base * (window_hash - ord(text[i]) * pow(base, p - 1, prime)) + ord(text[i + p])) % prime
-            window_hash = (window_hash + prime) % prime
-    return result
+    return results
