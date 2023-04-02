@@ -1,4 +1,17 @@
 def brute_force_search(pattern, text):
+    positions = []
+    for i in range(len(text)):
+        for j in range(len(pattern)):
+            if i + j >= len(text) or text[i + j] != pattern[j]:
+                break
+        else:
+            positions.append(i)
+    return positions
+
+
+
+'''
+def brute_force_search(pattern, text):
     # Create an empty list to store the starting positions of the pattern in the text
     positions = []
 
@@ -15,3 +28,4 @@ def brute_force_search(pattern, text):
 
     # Return the list of starting positions of the pattern in the text
     return positions
+'''
