@@ -1,0 +1,39 @@
+Introduction
+
+The Brute-force and Sunday algorithms are two of the simplest pattern matching algorithms that can be used to search
+for a pattern within a string. The Brute-force algorithm compares the pattern to every substring of the text, while the
+Sunday algorithm only compares the pattern to specific substrings of the text. In this implementation, we will extend
+both of these algorithms to accept wildcards ? and *.
+
+
+Implementation
+Brute-Force Algorithm
+
+In the Brute-force algorithm, we will modify the comparison between the pattern and the text to include the
+handling of wildcards. A wildcard can match any character, so we will compare each character in the pattern to
+the corresponding character in the text. If the character in the pattern is a wildcard (?), we will match it to
+any character in the text. If the character in the pattern is a *, we will match it to any substring of the text.
+
+
+Sunday Algorithm
+
+In the Sunday algorithm, we will also modify the comparison between the pattern and the text to include the handling
+of wildcards. A wildcard can match any character, so we will compare each character in the pattern to the corresponding
+character in the text. If the character in the pattern is a wildcard (?), we will match it to any character in the
+text. If the character in the pattern is a *, we will match it to any substring of the text.
+
+
+Explanation of Modifications
+
+The modifications made to the Brute-force and Sunday algorithms involve changing the comparison between the pattern and
+the text to include the handling of wildcards. If the character in the pattern is a wildcard (?), we will match it to
+any character in the text. If the character in the pattern is a *, we will match it to any substring of the text.
+
+For the Brute-force algorithm, we will check each character in the pattern against the corresponding character in the
+text. If the character in the pattern is a wildcard (?), we will consider it a match with any character in the text.
+If the character in the pattern is a *, we will recursively call the function with the remaining pattern and each
+substring of the text that starts at the current position. The k variable is used to keep track of the position in the
+text where we start the recursive call.
+
+For the Sunday algorithm, we will also check each character in the pattern against the corresponding character in the
+text.
