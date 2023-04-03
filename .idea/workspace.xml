@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="ee1d96d9-3611-43b0-b14e-41197187511d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/Assignment1/Task1/B/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment1/Task1/B/main.py" afterDir="false" />
     </list>
+=======
+    <list default="true" id="ee1d96d9-3611-43b0-b14e-41197187511d" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +52,11 @@
       <workItem from="1680430742262" duration="3963000" />
       <workItem from="1680509817265" duration="658000" />
       <workItem from="1680510495647" duration="379000" />
+<<<<<<< Updated upstream
       <workItem from="1680510879873" duration="1693000" />
+=======
+      <workItem from="1680510879873" duration="1996000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
