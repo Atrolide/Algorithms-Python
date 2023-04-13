@@ -27,6 +27,7 @@ def build_dictionary_trie(words):
 def spell_check_trie(text, trie):
     errors = []
     node = trie.root
+    node_prefix = ''
     for char in text.lower():
         if char == ' ':
             if not node.is_word:

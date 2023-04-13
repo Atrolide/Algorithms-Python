@@ -2,10 +2,10 @@ from collections import defaultdict
 from sortedcontainers import SortedSet
 
 
-def build_dictionary_bbst(filename):
-    with open(filename, 'r') as f:
-        words = SortedSet(line.strip() for line in f)
+def build_dictionary_bbst(words):
+    words = SortedSet(line.strip() for line in words)
     return words
+
 
 
 def spell_check_bbst(text, dictionary):
