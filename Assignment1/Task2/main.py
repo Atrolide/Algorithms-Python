@@ -16,6 +16,7 @@ if __name__ == "__main__":
     text2 = "helloworld"
     test_algorithms(pattern2, text2)
 
+
     pattern3 = "abcde*fgh?i"
     text3 = "abcdefgabcdefghi"
     test_algorithms(pattern3, text3)
@@ -28,8 +29,8 @@ if __name__ == "__main__":
     text5 = "he?lo*world"
     test_algorithms(pattern5, text5)
 
-    pattern6 = "*a\b?c"
-    text6 = "xa\bxc"
+    pattern6 = "Cotam\?"
+    text6 = "Cotam?"
     test_algorithms(pattern6, text6)
 
     pattern7 = "*\\**"
@@ -44,6 +45,15 @@ if __name__ == "__main__":
     text9 = "axbybc?d"
     test_algorithms(pattern9, text9)
 
-    pattern10 = "a*b\*c\?d"
+    pattern10 = "a*b\*c?d"
     text10 = "axbyb*czd"
     test_algorithms(pattern10, text10)
+
+    pattern11 = "a\*b"
+    text11 = "a*b"
+    test_algorithms(pattern11, text11)
+
+    pattern12 = "a\?b"
+    text12 = "a?b"
+    test_algorithms(pattern12, text12)
+
