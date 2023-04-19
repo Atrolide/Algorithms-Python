@@ -1,3 +1,5 @@
+# TODO - PRZEPISZ NA UNIT TEST
+
 import timeit
 from Task1.pattern_matching import *
 import string

@@ -4,7 +4,9 @@ def brute_force_search(pattern, text):
     i = 0
     while i <= n - m:
         j = 0
-        while j < m and (text[i+j] == pattern[j] or pattern[j] == '?'):
+        while j < m and (text[i+j] == pattern[j] or pattern[j] == '?' or pattern[j] == '*'):
+            if pattern[j] == '\\':
+                j += 1
             j += 1
         if j == m:
             return True
@@ -16,3 +18,10 @@ def brute_force_search(pattern, text):
                 k += 1
         i += 1
     return False
+
+
+
+
+
+
+

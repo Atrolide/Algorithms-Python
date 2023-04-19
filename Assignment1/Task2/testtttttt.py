@@ -1,4 +1,4 @@
-def sunday_search(pattern, text):
+def sunday_algorithm(text, pattern):
     text_length = len(text)
     pattern_length = len(pattern)
     i = 0  # Index for text
@@ -16,31 +16,7 @@ def sunday_search(pattern, text):
             if i == text_length:
                 # Reached the end of text, no match found
                 return False
-        elif pattern[j] == '?':
-            # Wildcard found, matches any single character in text
-            i += 1
-            j += 1
-        elif pattern[j] == '\\':
-            # Check if the next character after backslash is a wildcard
-            if j + 1 < pattern_length and pattern[j + 1] in ['*', '?']:
-                # Backslash followed by wildcard, treat it as a regular character
-                if text[i] == pattern[j + 1]:
-                    # Match found, move to next character in both text and pattern
-                    i += 1
-                    j += 2
-                else:
-                    # Mismatch, no match found
-                    return False
-            else:
-                # Backslash followed by a character, treat it as a regular character
-                if text[i] == pattern[j]:
-                    # Match found, move to next character in both text and pattern
-                    i += 1
-                    j += 1
-                else:
-                    # Mismatch, no match found
-                    return False
-        elif text[i] == pattern[j]:
+        if text[i] == pattern[j]:
             i += 1
             j += 1
         else:
@@ -62,3 +38,13 @@ def sunday_search(pattern, text):
         # Match not found
         return False
 
+
+
+# Example usage
+text = "hellodupaworld"
+pattern = "hello*world"
+result = sunday_algorithm(text, pattern)
+print(f"Pattern: {pattern}")
+print(f"Text: {text}")
+print(result)  # Output: True
+print("=" * 50)
