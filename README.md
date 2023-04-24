@@ -34,7 +34,7 @@ To use this project, follow these steps:
   * [Task 3](https://github.com/Atrolide/Algorithms-Python/tree/main/Assignment2/Task3)<br>
   
   
-  ##This Project was created by:
+  ## This Project was created by:
   *Grzegorz Łoszewski
   *Daniel Adamiak
   *Adam Kuszczyński
