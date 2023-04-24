@@ -35,6 +35,7 @@ To use this project, follow these steps:
   
   
   ## This Project was created by:
-  *Grzegorz Łoszewski
-  *Daniel Adamiak
-  *Adam Kuszczyński
+  
+  * Grzegorz Łoszewski
+  * Daniel Adamiak
+  * Adam Kuszczyński
