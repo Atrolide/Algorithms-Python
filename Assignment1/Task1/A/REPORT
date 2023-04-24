@@ -1,0 +1,36 @@
+Report: Comparison of Pattern Matching Algorithms
+Introduction
+In this report, we will compare different pattern matching algorithms, including Brute-force, Sunday, KMP, FSM,
+Rabin-Karp, and Gusfield Z. We will evaluate these algorithms' performance using two patterns, a short one and a
+long one, against a large text corpus from Homer's "Illiad." This report aims to provide insights into the strengths
+and weaknesses of each algorithm and help understand which algorithm works best for different pattern sizes and text
+lengths.
+
+Description of the Algorithms
+1.	Brute-force: The simplest pattern matching algorithm, which involves checking each character in the text against
+    the pattern one by one until either the pattern is found or the end of the text is reached. This algorithm has a
+    time complexity of O(n*m), where n is the length of the text and m is the length of the pattern.
+2.	Sunday: This algorithm is similar to the brute-force algorithm, but it takes advantage of the characters that come
+    after the pattern's end position in the text to skip over irrelevant parts of the text. This algorithm has a time
+    complexity of O(n), making it faster than brute-force in some cases.
+3.	KMP: This algorithm is based on the idea of matching the longest possible proper prefix of the pattern with the
+    longest possible proper suffix of the pattern, which can be matched in the text. This algorithm has a time
+    complexity of O(n+m).
+4.	FSM: The Finite State Machine algorithm works by constructing a finite state machine that represents the pattern
+    and then using the machine to search for matches in the text. This algorithm has a time complexity of O(n).
+5.	Rabin-Karp: This algorithm uses a hash function to convert the pattern and text into a numerical representation,
+    which can be compared to find matches. This algorithm has a time complexity of O(n+m).
+6.	Gusfield Z: This algorithm constructs an array of length m (the length of the pattern) that stores the length of
+    the longest substring starting from each position that matches the pattern's prefix. This algorithm has a time
+    complexity of O(n+m).
+
+
+Conclusion
+We measured the running time of each algorithm using a short pattern and a long pattern against a large text corpus.
+The results are summarized in the graph below.
+The pattern matching algorithms were evaluated for both short and long patterns. The results showed that the Sunday
+algorithm performed the best in terms of execution time for both patterns, while the Brute force algorithm was the
+slowest. The KMP and FSM algorithms were efficient for both patterns, and their execution times were similar. On the
+other hand, the Rabin-Karp and Gusfield-Z algorithms were slightly slower compared to the other algorithms. Overall,
+the study suggests that the choice of algorithm can significantly affect the performance of pattern matching, and
+selecting the appropriate algorithm for a given pattern can lead to better results.
