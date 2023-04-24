@@ -32,3 +32,10 @@ To use this project, follow these steps:
     * [B](https://github.com/Atrolide/Algorithms-Python/tree/main/Assignment2/Task1/B)
   * [Task 2](https://github.com/Atrolide/Algorithms-Python/tree/main/Assignment2/Task2)<br>
   * [Task 3](https://github.com/Atrolide/Algorithms-Python/tree/main/Assignment2/Task3)<br>
+  
+  
+  ## This Project was created by:
+  
+  * Grzegorz Łoszewski
+  * Daniel Adamiak
+  * Adam Kuszczyński
