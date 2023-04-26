@@ -1,4 +1,4 @@
-def brute_force_search (pattern, text):
+def brute_force_search(pattern, text):
     m, n = len(text), len(pattern)
     i, j = 0, 0
     while i < m and j < n:
