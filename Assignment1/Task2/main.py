@@ -1,3 +1,5 @@
+#TODO: znajodoać po kilku liter po * a nie po 1 znaku odrazu
+
 from Task2.pattern_matching import *
 
 def test_algorithms(pattern, text):
@@ -8,14 +10,13 @@ def test_algorithms(pattern, text):
     print("=" * 50)
 
 if __name__ == "__main__":
-    pattern1 = "hello*world"
-    text1 = "hellobeautifulworld"
+    pattern1 = "ab*cd"
+    text1 = "abcd"
     test_algorithms(pattern1, text1)
 
-    pattern2 = "helloworld"
-    text2 = "helloworld"
+    pattern2 = "hello?world"
+    text2 = "hellowworld"
     test_algorithms(pattern2, text2)
-
 
     pattern3 = "abcde*fgh?i"
     text3 = "abcdefgabcdefghi"

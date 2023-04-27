@@ -1,3 +1,5 @@
+# TODO: zrobić loop gdzie mierzony tekst będzie coraz wiekszy, zrobić żeby algorytm szukał dalej tesktu
+
 from Task1.pattern_matching import *
 import timeit
 import warnings
@@ -60,7 +62,7 @@ plt.ylabel('Running Time (seconds)')
 plt.title('Running Time of Pattern Matching Algorithms for Short and Long Patterns')
 plt.legend()
 plt.show()
-# plt.savefig('pattern_matching.png')
+plt.savefig('pattern_matching.png')
 
 
 print(f"Short pattern:")

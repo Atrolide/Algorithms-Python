@@ -1,4 +1,4 @@
-# TODO - PRZEPISZ NA UNIT TEST
+# TODO - zrobić stały tekst i pattern
 
 import timeit
 from Task1.pattern_matching import *
@@ -7,6 +7,7 @@ import random
 
 T = ''.join(random.choices(string.ascii_lowercase, k=100000))
 P = T[5000:7000]
+
 
 t_binary_sunday = timeit.timeit(lambda: binary_sunday_search(P, T), number=100)
 t_gusfield_z = timeit.timeit(lambda: gusfield_z_search(P, T), number=100)
@@ -32,6 +33,7 @@ else:
 T = ''.join(random.choices(string.ascii_lowercase, k=100000))
 pattern = ''.join(random.choices(string.ascii_lowercase, k=100))
 P = pattern + ''.join([''.join(random.choices(string.ascii_lowercase, k=1000)) + pattern for _ in range(99)])
+
 t_rabin_karp2 = timeit.timeit(lambda: rabin_karp_search(P, T), number=100)
 t_sunday = timeit.timeit(lambda: sunday_search(P, T), number=100)
 
