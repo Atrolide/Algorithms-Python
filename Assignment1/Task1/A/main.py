@@ -1,83 +1,73 @@
-# TODO: zrobić loop gdzie mierzony tekst będzie coraz wiekszy, zrobić żeby algorytm szukał dalej tesktu
-
 from Task1.pattern_matching import *
 import timeit
 import warnings
 import matplotlib.pyplot as plt
+import random
+import re
+from tabulate import tabulate
+from termcolor import colored
 
 # Open the text file and read its contents
 with open('IlliadByHomer.txt', 'r', encoding='utf-8') as file:
-    text = file.read()
+    all_lines = file.readlines()
 
-# Define the short and long patterns to search for
-short_pattern = "At every rite his share should be increased,\
-And his the foremost honours of the feast."
-long_pattern = "Lie there, Otryntides! the Trojan earth\
-Receives thee dead, though Gygae boast thy birth;\
-Those beauteous fields where Hyllus’ waves are roll’d,\
-And plenteous Hermus swells with tides of gold,\
-Are thine no more.”—The insulting hero said,\
-And left him sleeping in eternal shade.\
-The rolling wheels of Greece the body tore,\
-And dash’d their axles with no vulgar gore."
+num_lines = 5000
+running_times_list = []
+while num_lines < 25000:
+    # Read a certain number of lines from the text file
+    text = ''.join(all_lines[:num_lines])
 
+    # Find all the sentences in the text
+    sentences = re.findall(r'([^.!?]+[.!?])', text)
 
-# Measure the running time of each algorithm for each pattern
+    # Choose a random 3-sentence pattern
+    pattern_start = random.randint(0, len(sentences) - 3)
+    pattern_end = pattern_start + 3
+    long_pattern = ' '.join(sentences[pattern_start:pattern_end])
 
-bf_running_time_short = timeit.timeit(lambda: brute_force_search(short_pattern, text), number=1)
-sunday_running_time_short = timeit.timeit(lambda: sunday_search(short_pattern, text), number=1)
-kmp_running_time_short = timeit.timeit(lambda: kmp_search(short_pattern, text), number=1)
-fsm_running_time_short = timeit.timeit(lambda: fsm_search(short_pattern, text), number=1)
-rk_running_time_short = timeit.timeit(lambda: rabin_karp_search(short_pattern, text), number=1)
-gz_running_time_short = timeit.timeit(lambda: gusfield_z_search(short_pattern, text), number=1)
+    # Measure the running time of each algorithm for the pattern
+    bf_running_time = timeit.timeit(lambda: brute_force_search(long_pattern, text), number=1)
+    sunday_running_time = timeit.timeit(lambda: sunday_search(long_pattern, text), number=1)
+    kmp_running_time = timeit.timeit(lambda: kmp_search(long_pattern, text), number=1)
+    fsm_running_time = timeit.timeit(lambda: fsm_search(long_pattern, text), number=1)
+    rk_running_time = timeit.timeit(lambda: rabin_karp_search(long_pattern, text), number=1)
+    gz_running_time = timeit.timeit(lambda: gusfield_z_search(long_pattern, text), number=1)
 
-# Check if the short pattern was found
-if not bf_running_time_short and not sunday_running_time_short and not kmp_running_time_short and not fsm_running_time_short and not rk_running_time_short and not gz_running_time_short:
-    raise ValueError("Short pattern not found in the text")
+    # Check if the pattern was found
+    if not bf_running_time and not sunday_running_time and not kmp_running_time and not fsm_running_time and not rk_running_time and not gz_running_time:
+        raise ValueError("Pattern not found in the text")
 
-bf_running_time_long = timeit.timeit(lambda: brute_force_search(long_pattern, text), number=1)
-sunday_running_time_long = timeit.timeit(lambda: sunday_search(long_pattern, text), number=1)
-kmp_running_time_long = timeit.timeit(lambda: kmp_search(long_pattern, text), number=1)
-fsm_running_time_long = timeit.timeit(lambda: fsm_search(long_pattern, text), number=1)
-rk_running_time_long = timeit.timeit(lambda: rabin_karp_search(long_pattern, text), number=1)
-gz_running_time_long = timeit.timeit(lambda: gusfield_z_search(long_pattern, text), number=1)
+    # Append the running times to the list
+    running_times_list.append([bf_running_time, sunday_running_time, kmp_running_time, fsm_running_time, rk_running_time, gz_running_time])
 
-# Check if the long pattern was found
-if not bf_running_time_long and not sunday_running_time_long and not kmp_running_time_long and not fsm_running_time_long and not rk_running_time_long and not gz_running_time_long:
-    raise ValueError("Long pattern not found in the text")
+    num_lines += 5000
+
+    print(f"\nNumber of lines: {num_lines} \n")
+    print(f"\nRandomly chosen pattern:\n {long_pattern}\n")
+    headers = ['Algorithm', 'Running Time (seconds)']
+    table = []
+    for i, algorithm in enumerate(['Brute Force', 'Sunday', 'KMP', 'FSM', 'Rabin-Karp', 'Gusfield-Z']):
+        color = 'green' if running_times_list[-1][i] == min(running_times_list[-1]) else 'white'
+        table.append([colored(algorithm, color), colored(f"{running_times_list[-1][i]:.5f}", color)])
+    print(tabulate(table, headers=headers, tablefmt='grid'))
 
 # Filter out the deprecation warning
 warnings.filterwarnings("ignore", message="Support for FigureCanvases without a required_interactive_framework attribute was deprecated")
 
-# Plot the running time of each algorithm for each pattern
+# Plot the running time of each algorithm for the pattern
 algorithms = ['Brute Force', 'Sunday', 'KMP', 'FSM', 'Rabin-Karp', 'Gusfield-Z']
-short_running_times = [bf_running_time_short, sunday_running_time_short, kmp_running_time_short, fsm_running_time_short, rk_running_time_short, gz_running_time_short]
-long_running_times = [bf_running_time_long, sunday_running_time_long, kmp_running_time_long, fsm_running_time_long, rk_running_time_long, gz_running_time_long]
+colors = ['blue', 'orange', 'green', 'red', 'purple', 'brown']
 
 fig, ax = plt.subplots()
-ax.plot(algorithms, short_running_times, marker='o', label='Short Pattern')
-ax.plot(algorithms, long_running_times, marker='o', label='Long Pattern')
-plt.xlabel('Algorithm')
+for i in range(len(algorithms)):
+    ax.plot(range(5000, 25000, 5000), [running_times[i] for running_times in running_times_list], marker='o', color=colors[i], label=algorithms[i])
+    for j in range(len(range(5000, 25000, 5000))):
+        ax.annotate(f"{running_times_list[j][i]:.3f}", xy=(range(5000, 25000, 5000)[j], running_times_list[j][i]), xytext=(8,-10), textcoords='offset points', color=colors[i])
+
+
+plt.xlabel('Number of Lines')
 plt.ylabel('Running Time (seconds)')
-plt.title('Running Time of Pattern Matching Algorithms for Short and Long Patterns')
+plt.title('Running Time of Pattern Matching Algorithms for Patterns of Increasing Length')
 plt.legend()
 plt.show()
-plt.savefig('pattern_matching.png')
-
-
-print(f"Short pattern:")
-print(f"Brute force running time: {bf_running_time_short:.5f} seconds")
-print(f"Sunday running time: {sunday_running_time_short:.5f} seconds")
-print(f"KMP running time: {kmp_running_time_short:.5f} seconds")
-print(f"FSM running time: {fsm_running_time_short:.5f} seconds")
-print(f"Rabin-Karp running time: {rk_running_time_short:.5f} seconds")
-print(f"Gusfield-Z running time: {gz_running_time_short:.5f} seconds")
-
-print(f"\nLong pattern:")
-print(f"Brute force running time: {bf_running_time_long:.5f} seconds")
-print(f"Sunday running time: {sunday_running_time_long:.5f} seconds")
-print(f"KMP running time: {kmp_running_time_long:.5f} seconds")
-print(f"FSM running time: {fsm_running_time_long:.5f} seconds")
-print(f"Rabin-Karp running time: {rk_running_time_long:.5f} seconds")
-print(f"Gusfield-Z running time: {gz_running_time_long:.5f} seconds")
 
