@@ -1,5 +1,3 @@
-#TODO: znajodoać po kilku liter po * a nie po 1 znaku odrazu
-
 from Task2.pattern_matching import *
 
 def test_algorithms(pattern, text):
@@ -34,27 +32,31 @@ if __name__ == "__main__":
     text6 = "Cotam?"
     test_algorithms(pattern6, text6)
 
-    pattern7 = "*\\**"
-    text7 = "foo\*bar\baz"
+    pattern7 = "ab*cde?fg"
+    text7 = "abxcdeyfg"
     test_algorithms(pattern7, text7)
 
-    pattern8 = "ab*cde?fg"
-    text8 = "abxcdeyfg"
+    pattern8 = "a*b\*c\?d"
+    text8 = "axbybc?d"
     test_algorithms(pattern8, text8)
 
-    pattern9 = "a*b\*c\?d"
-    text9 = "axbybc?d"
+    pattern9 = "a*b\*c?d"
+    text9 = "axbyb*czd"
     test_algorithms(pattern9, text9)
 
-    pattern10 = "a*b\*c?d"
-    text10 = "axbyb*czd"
+    pattern10 = "a\*b"
+    text10 = "a*b"
     test_algorithms(pattern10, text10)
 
-    pattern11 = "a\*b"
-    text11 = "a*b"
+    pattern11 = "a\?b"
+    text11 = "a?b"
     test_algorithms(pattern11, text11)
 
-    pattern12 = "a\?b"
-    text12 = "a?b"
+    pattern12 = "ab*cd"
+    text12 = "abyyycd"
     test_algorithms(pattern12, text12)
+
+    pattern13 = "ab*cd"
+    text13 = "abyyycyycd"
+    test_algorithms(pattern13, text13)
 

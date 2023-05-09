@@ -5,26 +5,34 @@ def sunday_search(pattern, text):
     j = 0  # Index for pattern
 
     while i < text_length:
+        if j == pattern_length:
+            # Reached the end of pattern, match found
+            return True
+
         if pattern[j] == '*':
-            # Wildcard found, check if it matches any sequence of characters in text
+            # Wildcard found, check all possible matches for the sequence of characters after the wildcard
             j += 1
             if j == pattern_length:
                 # Wildcard is the last character in pattern, match found
                 return True
-            while i < text_length and text[i] != pattern[j]:
-                i += 1
-            if i == text_length:
-                # Reached the end of text, no match found
-                return False
+            for k in range(i, text_length):
+                if sunday_search(pattern[j:], text[k:]):
+                    # Match found after the wildcard, return True
+                    return True
+            # No match found after the wildcard, return False
+            return False
+
         elif pattern[j] == '?':
             # Wildcard found, matches any single character in text
-            i += 1
+            if i < text_length:
+                i += 1
             j += 1
+
         elif pattern[j] == '\\':
             # Check if the next character after backslash is a wildcard
             if j + 1 < pattern_length and pattern[j + 1] in ['*', '?']:
                 # Backslash followed by wildcard, treat it as a regular character
-                if text[i] == pattern[j + 1]:
+                if i < text_length and text[i] == pattern[j + 1]:
                     # Match found, move to next character in both text and pattern
                     i += 1
                     j += 2
@@ -33,16 +41,18 @@ def sunday_search(pattern, text):
                     return False
             else:
                 # Backslash followed by a character, treat it as a regular character
-                if text[i] == pattern[j]:
+                if i < text_length and text[i] == pattern[j]:
                     # Match found, move to next character in both text and pattern
                     i += 1
                     j += 1
                 else:
                     # Mismatch, no match found
                     return False
-        elif text[i] == pattern[j]:
+
+        elif i < text_length and text[i] == pattern[j]:
             i += 1
             j += 1
+
         else:
             if i + pattern_length < text_length:
                 # Check if the next character in text matches the first character in pattern

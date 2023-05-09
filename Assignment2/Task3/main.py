@@ -10,7 +10,7 @@ import time
 import matplotlib.pyplot as plt
 
 
-def test(load_factor, n=10000):
+def test(load_factor, n):
     keys = [str(i) for i in range(n)]
     values = [i for i in range(n)]
 
@@ -110,4 +110,4 @@ def test(load_factor, n=10000):
 
 # powinny byc wieksze wartosci / dodac zapisanie wykresu bo dlugo trwa funkcja przy wiekszych
 # 5000 , 1.0
-test(0.5, 7000)
+test(1.0, 50)

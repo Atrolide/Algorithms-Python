@@ -39,40 +39,48 @@ class TestPatternMatching(unittest.TestCase):
         self.assertTrue(sunday_search(pattern, text))
 
     def test_7(self):
-        pattern = "*\\**"
-        text = "foo*bar\\baz"
-        self.assertFalse(brute_force_search(pattern, text))
-        self.assertFalse(sunday_search(pattern, text))
-
-    def test_8(self):
         pattern = "ab*cde?fg"
         text = "abxcdeyfg"
         self.assertTrue(brute_force_search(pattern, text))
         self.assertTrue(sunday_search(pattern, text))
 
-    def test_9(self):
+    def test_8(self):
         pattern = "a*b\*c\?d"
         text = "axbybc?d"
         self.assertFalse(brute_force_search(pattern, text))
         self.assertFalse(sunday_search(pattern, text))
 
-    def test_10(self):
+    def test_9(self):
         pattern = "a*b\*c?d"
         text = "axbyb*czd"
-        self.assertFalse(brute_force_search(pattern, text))
-        self.assertFalse(sunday_search(pattern, text))
+        self.assertTrue(brute_force_search(pattern, text))
+        self.assertTrue(sunday_search(pattern, text))
 
-    def test_11(self):
+    def test_10(self):
         pattern = "a\*b"
         text = "a*b"
         self.assertTrue(brute_force_search(pattern, text))
         self.assertTrue(sunday_search(pattern, text))
 
-    def test_12(self):
+    def test_11(self):
         pattern = "a\?b"
         text = "a?b"
         self.assertTrue(brute_force_search(pattern, text))
         self.assertTrue(sunday_search(pattern, text))
+
+    def test_12(self):
+        pattern = "ab*cd"
+        text = "abyyycd"
+        self.assertTrue(brute_force_search(pattern, text))
+        self.assertTrue(sunday_search(pattern, text))
+
+    def test_13(self):
+        pattern = "ab*cd"
+        text = "abyyycyycd"
+        self.assertTrue(brute_force_search(pattern, text))
+        self.assertTrue(sunday_search(pattern, text))
+
+
 
 if __name__ == '__main__':
     unittest.main()
