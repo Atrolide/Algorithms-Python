@@ -1,20 +1,38 @@
 from collections import deque
 
+
 def bfs(graph, start, end):
     # perform BFS to find the shortest path from start to end
+
+    # initialize a queue with a tuple containing the starting node and its distance from the start node
     queue = deque([(start, 0)])
+
+    # initialize a set to keep track of visited nodes
     visited = set()
+
+    # continue the BFS until the queue is empty
     while queue:
+        # dequeue the node at the front of the queue and its distance from the start node
         node, dist = queue.popleft()
+
+        # if the dequeued node is the destination node, return its distance from the start node
         if node == end:
             return dist
+
+        # if the dequeued node has already been visited, skip it
         if node in visited:
             continue
+
+        # mark the dequeued node as visited
         visited.add(node)
+
+        # enqueue all of the dequeued node's neighbors and their distances from the start node
         for neighbor in graph[node]:
-            queue.append((neighbor, dist+1))
-    # end node is not reachable
+            queue.append((neighbor, dist + 1))
+
+    # if the destination node is not reachable from the start node, return infinity
     return float('inf')
+
 
 # define the labyrinth graph
 labyrinth = {
@@ -31,26 +49,26 @@ labyrinth = {
 
 # define the initial positions and speeds of the wizards
 wizards = {
-    'Harry': ('A', 2),
-    'Ron': ('B', 3),
-    'Hermione': ('C', 4)
+    'Harry': ('A', 1),
+    'Ron': ('C', 1),
+    'Hermione': ('C', 9)
 }
 
 # find the shortest distance from each wizard's initial position to the exit
 distances = {}
 for wizard, (position, speed) in wizards.items():
     distances[wizard] = bfs(labyrinth, position, 'Exit')
+print(distances)  # add this line
 
 # calculate the time it will take for each wizard to reach the exit
 times = {}
 for wizard, (position, speed) in wizards.items():
-    times[wizard] = distances[wizard] / speed
+    times[wizard] = distances[wizard] / float(speed)
+
 
 # predict which wizard will reach the exit first
 winner = min(times, key=times.get)
-print("The winner is", winner, "with a time of", times[winner], "minutes.")
+print("The winner is", winner, "with a time of", times[winner] * 60, "seconds.")
 
 
-#Note that this code assumes that the labyrinth graph is represented as a dictionary where the keys are the nodes
-# and the values are lists of adjacent nodes. You will need to adjust the code accordingly if your
-# representation is different.
+

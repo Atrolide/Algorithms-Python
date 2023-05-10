@@ -14,6 +14,7 @@ def test(load_factor, n):
     keys = [str(i) for i in range(n)]
     values = [i for i in range(n)]
 
+    # The n / load_factor argument specifies the initial size of the hash table based on the number of elements n to be stored and a specified load factor.
     sep_chain_ht = HashTableSeparateChaining(int(n / load_factor))
     linear_probe_ht = HashTableLinearProbing(int(n / load_factor))
     double_hash_ht = HashTableDoubleHashing(int(n / load_factor))
@@ -84,7 +85,6 @@ def test(load_factor, n):
                 linear_probe_ht.search(key)
             end_time = timer()
             times.append(end_time - start_time)
-        # linear_probe_avg_time = sum(times) / len(times)
         linear_probe_y[i] = sum(times) / len(times)
 
         times = []
@@ -94,7 +94,6 @@ def test(load_factor, n):
                 double_hash_ht.search(key)
             end_time = time.time()
             times.append(end_time - start_time)
-            # double_hash_avg_time = sum(times) / len(times)
         double_hash_y[i] = sum(times) / len(times)
 
         # Create a chart to compare search times at different load factors
@@ -161,8 +160,5 @@ def test(load_factor, n):
         return sep_chain_y, linear_probe_y, double_hash_y
 
 
-print(test(0.1, 10000))
+print(test(0.1, 100000))
 
-# powinny byc wieksze wartosci / dodac zapisanie wykresu bo dlugo trwa funkcja przy wiekszych
-# 5000 , 1.0
-# test(1.0, 50)
