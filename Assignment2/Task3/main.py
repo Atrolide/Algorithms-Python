@@ -103,21 +103,21 @@ def test(load_factor, n):
         linear_probe_y = [0] * 10
         double_hash_y = [0] * 10
 
-        for i in range(5):
+        for i in range(10):
             # Instantiate hash tables for each load factor
             sep_chain_ht = HashTableSeparateChaining(int(n / x[i]))
             linear_probe_ht = HashTableLinearProbing(int(n / x[i]))
             double_hash_ht = HashTableDoubleHashing(int(n / x[i]))
 
             # Insert keys and values into hash tables
-            for j in range(5):
+            for j in range(10):
                 sep_chain_ht.insert(keys[j], values[j])
                 linear_probe_ht.insert(keys[j], values[j])
                 double_hash_ht.insert(keys[j], values[j])
 
             # Time the search operation for each load factor
             times = []
-            for j in range(5):
+            for j in range(10):
                 start_time = time.time()
                 for key in keys:
                     sep_chain_ht.search(key)
@@ -126,7 +126,7 @@ def test(load_factor, n):
             sep_chain_y[i] = sum(times) / len(times)
 
             times = []
-            for j in range(5):
+            for j in range(10):
                 start_time = time.time()
                 for key in keys:
                     linear_probe_ht.search(key)
@@ -135,7 +135,7 @@ def test(load_factor, n):
             linear_probe_y[i] = sum(times) / len(times)
 
             times = []
-            for j in range(5):
+            for j in range(10):
                 start_time = time.time()
                 for key in keys:
                     double_hash_ht.search(key)
