@@ -1,6 +1,7 @@
 import unittest
 from Task2.pattern_matching import brute_force_search, sunday_search
 
+
 class TestPatternMatching(unittest.TestCase):
     def test_1(self):
         pattern = "hello*world"
@@ -75,11 +76,10 @@ class TestPatternMatching(unittest.TestCase):
         self.assertTrue(sunday_search(pattern, text))
 
     def test_13(self):
-        pattern = "ab*cd"
-        text = "abyyycyycd"
+        pattern = "aba"
+        text = "babaaaaa"
         self.assertTrue(brute_force_search(pattern, text))
         self.assertTrue(sunday_search(pattern, text))
-
 
 
 if __name__ == '__main__':
