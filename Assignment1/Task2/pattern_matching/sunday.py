@@ -1,8 +1,14 @@
 def sunday_search(pattern, text):
     text_length = len(text)
     pattern_length = len(pattern)
-    i = 0  # Index for text
-    j = 0  # Index for pattern
+    i = 0 # Index for text
+    j = 0 # Index for pattern
+
+    # Generate shift table
+    shift_table = {}
+    for k in range(pattern_length - 1, -1, -1):
+        if pattern[k] not in shift_table:
+            shift_table[pattern[k]] = pattern_length - k - 1
 
     while i < text_length:
         if j == pattern_length:
@@ -19,6 +25,7 @@ def sunday_search(pattern, text):
                 if sunday_search(pattern[j:], text[k:]):
                     # Match found after the wildcard, return True
                     return True
+
             # No match found after the wildcard, return False
             return False
 
@@ -26,7 +33,7 @@ def sunday_search(pattern, text):
             # Wildcard found, matches any single character in text
             if i < text_length:
                 i += 1
-            j += 1
+                j += 1
 
         elif pattern[j] == '\\':
             # Check if the next character after backslash is a wildcard
@@ -54,21 +61,16 @@ def sunday_search(pattern, text):
             j += 1
 
         else:
-            if i + pattern_length < text_length:
-                # Check if the next character in text matches the first character in pattern
-                next_char = text[i + pattern_length]
-                if next_char in pattern:
-                    i += pattern_length - pattern.find(next_char)
-                else:
-                    i += pattern_length + 1
-            else:
-                # Reached the end of text, no match found
-                return False
+            if j == 0:
+                i += 1 # No match at first character of pattern, shift by one (bad character rule)
+            elif j == 1 or (j > 1 and pattern[0:j-1] not in text[i-j+1:i]):
+                i += shift_table.get(text[i], pattern_length) # Shift by length of matched prefix plus one (good suffix rule)
+                j = 0
 
     if j == pattern_length:
         # Reached the end of pattern, match found
         return True
+
     else:
         # Match not found
         return False
-
