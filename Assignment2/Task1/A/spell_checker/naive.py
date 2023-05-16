@@ -1,5 +1,5 @@
 def build_dictionary_naive(words):
-    return set(words)
+    return set(word.lower() for word in words)
 
 
 def spell_check_naive(text, dictionary):
