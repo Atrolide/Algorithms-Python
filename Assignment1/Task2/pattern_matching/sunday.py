@@ -1,8 +1,8 @@
 def sunday_search(pattern, text):
     text_length = len(text)
     pattern_length = len(pattern)
-    i = 0 # Index for text
-    j = 0 # Index for pattern
+    i = 0  # Index for text
+    j = 0  # Index for pattern
 
     # Generate shift table
     shift_table = {}
@@ -62,9 +62,9 @@ def sunday_search(pattern, text):
 
         else:
             if j == 0:
-                i += 1 # No match at first character of pattern, shift by one (bad character rule)
+                i += 1  # No match at first character of pattern, shift by one (bad character rule)
             elif j == 1 or (j > 1 and pattern[0:j-1] not in text[i-j+1:i]):
-                i += shift_table.get(text[i], pattern_length) # Shift by length of matched prefix plus one (good suffix rule)
+                i += shift_table.get(text[i], pattern_length)  # Shift by length of matched prefix plus one (good suffix rule)
                 j = 0
 
     if j == pattern_length:
