@@ -9,7 +9,6 @@ def brute_force_search(pattern, text):
     return positions
 
 
-
 '''
 def brute_force_search(pattern, text):
     # Create an empty list to store the starting positions of the pattern in the text

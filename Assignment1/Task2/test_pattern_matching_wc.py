@@ -16,8 +16,8 @@ class TestPatternMatching(unittest.TestCase):
         self.assertTrue(sunday_search(pattern, text))
 
     def test_3(self):
-        pattern = "abcde*fgh?i"  # 11
-        text = "abcdefgabcdefghi"  # 16
+        pattern = "abcde*fgh?i"
+        text = "abcdefgabcdefghi"
         self.assertFalse(brute_force_search(pattern, text))
         self.assertFalse(sunday_search(pattern, text))
 
@@ -36,7 +36,7 @@ class TestPatternMatching(unittest.TestCase):
     def test_6(self):
         pattern = "m\?"
         text = "m?"
-        # self.assertTrue(brute_force_search(pattern, text))
+        self.assertTrue(brute_force_search(pattern, text))
         self.assertTrue(sunday_search(pattern, text))
 
     def test_7(self):
@@ -46,7 +46,7 @@ class TestPatternMatching(unittest.TestCase):
         self.assertTrue(sunday_search(pattern, text))
 
     def test_8(self):
-        pattern = "a*b\\*c\\?d"
+        pattern = "a*b\\*c\\?d"  # 9
         text = "axbybc?d"
         self.assertFalse(brute_force_search(pattern, text))
         self.assertFalse(sunday_search(pattern, text))
@@ -77,7 +77,7 @@ class TestPatternMatching(unittest.TestCase):
 
     def test_13(self):
         pattern = "aba"
-        text = "aaaba"
+        text = "aaba"
         self.assertTrue(brute_force_search(pattern, text))
         self.assertTrue(sunday_search(pattern, text))
 

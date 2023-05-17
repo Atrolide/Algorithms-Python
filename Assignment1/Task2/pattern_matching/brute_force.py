@@ -20,7 +20,10 @@ def brute_force_search(pattern, text):
                 last_text = i
                 j += 1
             elif text[i] != pattern[j]:
-                return False
+                if j == 0:
+                    i += 1
+                else:
+                    return False
             else:
                 i += 1
                 j += 1
@@ -38,6 +41,8 @@ def brute_force_search(pattern, text):
             j = last_star + 1
             last_text += 1
             i = last_text
+        elif pattern[j] != text[i] and i + n <= m:
+            i += 1
         else:
             return False
 
