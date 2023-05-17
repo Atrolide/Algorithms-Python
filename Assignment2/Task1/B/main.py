@@ -7,8 +7,8 @@ def bfs(graph, start, end):
     queue = Queue()
     queue.put((start, 0))
 
-    # initialize a set to keep track of visited nodes
-    visited = set()
+    # initialize a dictionary to keep track of visited nodes and their distances from the start node
+    visited = {start: 0}
 
     # continue the BFS until the queue is empty
     while not queue.empty():
@@ -19,16 +19,11 @@ def bfs(graph, start, end):
         if node == end:
             return dist
 
-        # if the dequeued node has already been visited, skip it
-        if node in visited:
-            continue
-
-        # mark the dequeued node as visited
-        visited.add(node)
-
         # enqueue all of the dequeued node's neighbors and their distances from the start node
         for neighbor in graph[node]:
-            queue.put((neighbor, dist + 1))
+            if neighbor not in visited:
+                visited[neighbor] = dist + 1
+                queue.put((neighbor, dist + 1))
 
     # if the destination node is not reachable from the start node, return infinity
     return float('inf')
@@ -66,7 +61,6 @@ for wizard, (position, speed) in wizards.items():
     times[wizard] = distances[wizard] / float(speed)
 
 
-# predict which wizard will reach the exit first
 winner = min(times, key=times.get)
 print("The winner is", winner, "with a time of", times[winner] * 60, "seconds.")
 
