@@ -8,25 +8,28 @@ def brute_force_search(pattern, text):
             j += 1
             if j == n:
                 return False
-            if pattern[j] == '*':
-                j += 1
-                if j == n:
-                    return True
-                while i < m and text[i] != pattern[j]:
+            if pattern[j] == '?' or pattern[j] == '*':
+                if pattern[j] == text[i]:
                     i += 1
-                if i == m:
-                    return False
-                last_star = j
-                last_text = i
-                j += 1
-            elif text[i] != pattern[j]:
-                if j == 0:
-                    i += 1
+                    j += 1
                 else:
-                    return False
+                    if last_star >= 0:
+                        j = last_star + 1
+                        last_text += 1
+                        i = last_text
+                    else:
+                        return False
             else:
-                i += 1
-                j += 1
+                if text[i] != pattern[j]:
+                    if last_star >= 0:
+                        j = last_star + 1
+                        last_text += 1
+                        i = last_text
+                    else:
+                        return False
+                else:
+                    i += 1
+                    j += 1
         elif j < n and pattern[j] == '?':
             i += 1
             j += 1
@@ -50,3 +53,4 @@ def brute_force_search(pattern, text):
         j += 1
 
     return j == n
+
