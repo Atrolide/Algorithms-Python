@@ -23,8 +23,7 @@ for build_func, _ in spell_checkers:
     build_times.append(build_time)
 
 # Measure the spell check time for each spell checker implementation
-# Measure the spell check time for each spell checker implementation
-# Measure the spell check time for each spell checker implementation
+
 spell_check_times = []
 
 with open('IlliadByHomer2.txt', 'r', encoding='utf-8') as file:
