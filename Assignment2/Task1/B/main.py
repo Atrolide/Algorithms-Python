@@ -1,19 +1,19 @@
-from collections import deque
-
+from queue import Queue
 
 def bfs(graph, start, end):
     # perform BFS to find the shortest path from start to end
 
     # initialize a queue with a tuple containing the starting node and its distance from the start node
-    queue = deque([(start, 0)])
+    queue = Queue()
+    queue.put((start, 0))
 
     # initialize a set to keep track of visited nodes
     visited = set()
 
     # continue the BFS until the queue is empty
-    while queue:
+    while not queue.empty():
         # dequeue the node at the front of the queue and its distance from the start node
-        node, dist = queue.popleft()
+        node, dist = queue.get()
 
         # if the dequeued node is the destination node, return its distance from the start node
         if node == end:
@@ -28,7 +28,7 @@ def bfs(graph, start, end):
 
         # enqueue all of the dequeued node's neighbors and their distances from the start node
         for neighbor in graph[node]:
-            queue.append((neighbor, dist + 1))
+            queue.put((neighbor, dist + 1))
 
     # if the destination node is not reachable from the start node, return infinity
     return float('inf')
@@ -58,7 +58,7 @@ wizards = {
 distances = {}
 for wizard, (position, speed) in wizards.items():
     distances[wizard] = bfs(labyrinth, position, 'Exit')
-print(distances)  # add this line
+print(distances)
 
 # calculate the time it will take for each wizard to reach the exit
 times = {}
