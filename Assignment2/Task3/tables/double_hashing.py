@@ -1,5 +1,4 @@
-class HashTableDoubleHashing:
-    # Constructor method, initializes size, keys and values lists.
+class DoubleHashingHashTable:
     def __init__(self, size):
         self.size = size
         self.keys = [None] * size
@@ -42,3 +41,4 @@ class HashTableDoubleHashing:
             index = (index + i * self.hash2(key)) % self.size # Double hash
             i += 1
         return None # Return None if the key is not found
+
